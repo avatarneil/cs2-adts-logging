@@ -114,11 +114,13 @@ tests = testGroup "unit tests"
      @?= (LogMessage Info 4 "yo"): inorder Leaf ++ inorder (Node Leaf (LogMessage Warning 2 "aye")Leaf))
 
     , testProperty "build sorted"
-    (\msgList -> isSorted (inOrder (build msgList)))
+    (\msgList -> isSorted (inorder (build msgList)))
 
     -- show :: Int -> String
     -- gives the String representation of an Int
     -- Use show to test your code to parse Ints
+    , testProperty "parseTimeStamp test"
+    (\testNum -> {-add stuff here-} (parseTimeStamp (show testNum))) 
 
     -- Write a function that takes a MessageType, and makes a String
     -- with the same format as the log file:
