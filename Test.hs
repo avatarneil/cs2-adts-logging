@@ -120,7 +120,8 @@ tests = testGroup "unit tests"
     -- gives the String representation of an Int
     -- Use show to test your code to parse Ints
     , testProperty "parseTimeStamp test"
-    (\testNum -> {-add stuff here-} (parseTimeStamp (show testNum))) 
+     (testParseInt)
+
 
     -- Write a function that takes a MessageType, and makes a String
     -- with the same format as the log file:
@@ -132,5 +133,11 @@ tests = testGroup "unit tests"
     -- Use it to test parseMessage
 
   ]
+
+testParseInt :: Maybe TimeStamp -> Bool
+testParseInt i = i == parseTimeStamp(parserthing (show i))
+
+parserthing :: String -> [String]
+parserthing i = [i]
 
 main = defaultMain tests
