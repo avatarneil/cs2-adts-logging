@@ -134,8 +134,8 @@ tests = testGroup "unit tests"
 
   ]
 
-testParseInt :: Maybe TimeStamp -> Bool
-testParseInt i = i == parseTimeStamp(parserthing (show i))
+testParseInt :: Int -> Bool
+testParseInt i = Just i == parseTimeStamp(parserthing (show i))
 
 parserthing :: String -> [String]
 parserthing i = [i]
