@@ -140,4 +140,5 @@ testParseInt i = Just i == parseTimeStamp(parserthing (show i))
 parserthing :: String -> [String]
 parserthing i = [i]
 
+
 main = defaultMain tests
