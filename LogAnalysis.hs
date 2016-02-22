@@ -50,8 +50,8 @@ parseString cd = if elem (cd !! 2 !! 0 ) ['0','1','2','3','4','5','6','7','8','9
 insert :: LogMessage -> MessageTree -> MessageTree
 insert (Unknown _) as = as
 insert (LogMessage j k l) (Node z (LogMessage x b n) v) = if k < b
-                                                          then Node Leaf (LogMessage j k l ) (Node z (LogMessage x b n) v)
-                                                          else Node (Node z (LogMessage x b n) v) (LogMessage j k l) Leaf
+                                                          then Node (insert (LogMessage j k l) z) (LogMessage x b n) v
+                                                          else Node z (LogMessage x b n) (insert (LogMessage j k l) v)
 insert (LogMessage j k l) Leaf = Node Leaf (LogMessage j k l) Leaf
 
 build:: [LogMessage] -> MessageTree
