@@ -119,8 +119,11 @@ tests = testGroup "unit tests"
     -- show :: Int -> String
     -- gives the String representation of an Int
     -- Use show to test your code to parse Ints
-    , testProperty "parseTimeStamp test"
-     (testParseInt)
+    , testProperty "parseTimeStampError Test"
+     (testParseIntError)
+
+    , testProperty "parseTimeStampOther Test"
+     (testParseIntOther)
 
 
     -- Write a function that takes a MessageType, and makes a String
@@ -134,8 +137,10 @@ tests = testGroup "unit tests"
 
   ]
 
-testParseInt :: Int -> Bool
-testParseInt i = Just i == parseTimeStamp([show(i)])
+testParseIntError :: Int -> Bool
+testParseIntError i = Just i == parseTimeStamp(["awer","sdf",show(i)])
 
+testParseIntOther :: Int -> Bool
+testParseIntOther i = Just i == parseTimeStamp(["asljdf",show(i)])
 
 main = defaultMain tests
