@@ -137,10 +137,10 @@ tests = testGroup "unit tests"
 
   ]
 
-testParseIntError :: Int -> Bool
-testParseIntError i = Just i == parseTimeStamp(["awer","sdf",show(i)])
+testParseIntError :: NonNegative Int -> Bool
+testParseIntError (NonNegative i) = Just i == parseTimeStamp(["awer","sdf",show(i)])
 
-testParseIntOther :: Int -> Bool
-testParseIntOther i = Just i == parseTimeStamp(["asljdf",show(i)])
+testParseIntOther :: NonNegative Int -> Bool
+testParseIntOther (NonNegative i) = Just i == parseTimeStamp(["asljdf",show(i)])
 
 main = defaultMain tests
