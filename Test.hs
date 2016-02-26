@@ -136,8 +136,8 @@ tests = testGroup "unit tests"
     -- Make another function that makes a String from a whole LogMessage
     -- stringLogMessage :: LogMessage -> String
     -- Use it to test parseMessage
-
-  ]
+    , testProperty "logmessagestrings"
+     (logMessageTest)]
 
 testParseIntError :: NonNegative Int -> Bool
 testParseIntError (NonNegative i) = Just i == parseTimeStamp(["awer","sdf",show(i)])
@@ -159,5 +159,15 @@ errorThing a = ""
 messageTypeTest :: MessageType -> Bool
 messageTypeTest msgtype = Just msgtype == parseType(stringMessageType (msgtype) ++ ["aweroj","awer"])
 
+stringLogMessage :: LogMessage -> String
+stringLogMessage (LogMessage msgt timestamp string) = if msgt == Info
+                                                      then unwords["I",show(timestamp),string]
+                                                      else if msgt == Warning
+                                                      then unwords["W",show(timestamp),string]
+                                                      else unwords["E",errorThing (msgt),show(timestamp),string]
+stringLogMessage (Unknown string) = string
+
+logMessageTest :: LogMessage -> Bool
+logMessageTest logmsg = logmsg == parseMessage(stringLogMessage (logmsg))
 
 main = defaultMain tests
